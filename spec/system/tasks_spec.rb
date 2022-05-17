@@ -9,6 +9,7 @@ RSpec.describe "タスク管理機能", type: :system do
         fill_in "Content", with: "Laundry"
         click_button "Create Task"
         expect(page).to have_content "Laundry"
+        expect(page).to have_content "Task was successfully created."
       end
     end
   end
@@ -16,11 +17,9 @@ RSpec.describe "タスク管理機能", type: :system do
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '登録済みのタスク一覧が表示される' do
-        FactoryBot.create(:task)
-        FactoryBot.create(:second_task)
+        task = FactoryBot.create(:task)
         visit tasks_path
-        expect(page).to have_content '書類作成'
-        expect(page).to have_content 'メール送信'
+        expect(page).to have_content task.title
       end
     end
   end
