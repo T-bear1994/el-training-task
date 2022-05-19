@@ -5,6 +5,12 @@ ja:
   activerecord:
     models:
       task: タスク
+  views:
+    pagination:
+      first: 最初のページ
+      previous: 前へ
+      next: 次へ
+      last: 最後のページ
   tasks:
     index:
       title: タスク一覧ページ
