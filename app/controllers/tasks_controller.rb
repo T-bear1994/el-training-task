@@ -3,7 +3,13 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(10)
+    if params[:sort_deadline_on]
+      @tasks = Task.all.order(deadline_on: "ASC").page(params[:page]).per(10)
+    elsif
+      @tasks = Task.all.order(priority: "DESC").page(params[:page]).per(10)
+    else
+      @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(10)
+    end
   end
 
   # GET /tasks/1 or /tasks/1.json
