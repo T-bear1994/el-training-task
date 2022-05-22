@@ -13,6 +13,7 @@ class TasksController < ApplicationController
         @tasks = Task.where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
       end
     end
+    
     if params[:sort_deadline_on]
       @tasks.order(deadline_on: "ASC").page(params[:page]).per(10)
     end
@@ -80,6 +81,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.permit(:title, :content, :deadline_on, :priority, :status, :search)
+      params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
     end
 end
