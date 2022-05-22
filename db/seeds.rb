@@ -8,6 +8,9 @@
 50.times do |n|
   Task.create!(
     title: "sample task#{n + 1}",
-    content: "sample content#{n + 1}"
+    content: "sample content#{n + 1}",
+    deadline_on: "2022-05-30",
+    priority: 0,
+    status: 2
   )
 end
