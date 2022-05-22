@@ -3,24 +3,23 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(10)
+    @tasks = Task.all
+    if params[:sort_deadline_on]
+      @tasks = @tasks.all.order(deadline_on: "ASC").page(params[:page]).per(10)
+    elsif params[:sort_priority]
+      @tasks = @tasks.all.order(priority: "DESC").page(params[:page]).per(10)
+    else
+      @tasks = @tasks.all.order(created_at: "DESC").page(params[:page]).per(10)
+    end
     if params[:search].present?
       if params[:search][:status].present? && params[:search][:title].present?
-        @tasks = Task.where(status: "#{params[:search][:status]}").where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
+        @tasks = @tasks.where(status: "#{params[:search][:status]}").where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
       elsif params[:search][:status].present?
-        @tasks = Task.where(status: "#{params[:search][:status]}").page(params[:page]).per(10)
+        @tasks = @tasks.where(status: "#{params[:search][:status]}").page(params[:page]).per(10)
       elsif params[:search][:title].present?
-        @tasks = Task.where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
+        @tasks = @tasks.where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
       end
     end
-    
-    if params[:sort_deadline_on]
-      @tasks.order(deadline_on: "ASC").page(params[:page]).per(10)
-    end
-    if params[:sort_priority]
-      @tasks.order(priority: "DESC").page(params[:page]).per(10)
-    end
-        
   end
 
   # GET /tasks/1 or /tasks/1.json
