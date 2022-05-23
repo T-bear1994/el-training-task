@@ -11,15 +11,8 @@ class TasksController < ApplicationController
     else
       @tasks = @tasks.all.order(created_at: "DESC").page(params[:page]).per(10)
     end
-    if params[:search].present?
-      if params[:search][:status].present? && params[:search][:title].present?
-        @tasks = @tasks.where(status: "#{params[:search][:status]}").where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
-      elsif params[:search][:status].present?
-        @tasks = @tasks.where(status: "#{params[:search][:status]}").page(params[:page]).per(10)
-      elsif params[:search][:title].present?
-        @tasks = @tasks.where("title LIKE ?", "%#{params[:search][:title]}%").page(params[:page]).per(10)
-      end
-    end
+    @search_params = task_search_params
+    @tasks = Task.search_index(@search_params).page(params[:page]).per(10)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -81,5 +74,9 @@ class TasksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+    end
+
+    def task_search_params
+      params.fetch(:search, {}).permit(:status, :title)
     end
 end

@@ -9,7 +9,7 @@
   </div>
   <div class="title_search">
     <%= f.label t("attributes.title") %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, value: @search_params[:name] %>
   </div>
     <%= f.submit "検索" %>
 <% end %>
