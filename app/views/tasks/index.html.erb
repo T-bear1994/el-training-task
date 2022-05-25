@@ -4,11 +4,11 @@
 
 <%= form_with url: tasks_path, method: :get, scope: :search, local: true do |f| %>
   <div class="status_search">
-    <%= f.label t("attributes.status") %>
+    <%= f.label :status, t("attributes.status") %>
     <%= f.select :status, Task.statuses.keys.to_a, { include_blank: ""} %>
   </div>
   <div class="title_search">
-    <%= f.label t("attributes.title") %>
+    <%= f.label :title, t("attributes.title") %>
     <%= f.text_field :title %>
   </div>
     <%= f.submit "検索" %>
