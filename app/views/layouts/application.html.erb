@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%# ログインの有無でリンク表示を条件分岐する %>
     <ul>
       <li><%= link_to t("application.tasks_index"), tasks_path, id: "tasks-index" %></li>
       <li><%= link_to t("application.new_task"), new_task_path, id: "new-task" %></li>

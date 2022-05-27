@@ -24,6 +24,13 @@ ja:
       title: タスク詳細ページ
     edit:
       title: タスク編集ページ
+  users:
+    new:
+      title: アカウント登録ページ
+      submit: 登録する
+    edit:
+      title: アカウント編集ページ
+      submit: 更新する
   attributes:
     title:  タイトル
     content: 内容
@@ -33,6 +40,10 @@ ja:
     status: ステータス
     back: 戻る
     edit: 編集
+    name: 名前
+    email: メールアドレス
+    password: パスワード
+    password_confirmation: パスワード(確認)
   notice:
     create: タスクを登録しました
     update: タスクを更新しました
