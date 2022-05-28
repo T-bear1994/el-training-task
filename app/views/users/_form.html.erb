@@ -27,6 +27,9 @@
       <%= form.password_field :password_confirmation %>
     </div>
     <%# ログインの有無で条件分岐する、id属性 %>
-    <%= form.submit %>
-
+    <% if @user.persisted? %>
+      <%= form.submit id: "update-user" %>
+    <% else %>
+      <%= form.submit id: "create-user" %>
+    <% end %>
 <% end %>

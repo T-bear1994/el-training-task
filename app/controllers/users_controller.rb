@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  before_action :correct_user, only: [:show]
+  skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :logout_required, only: [:show, :edit, :update]
+
   def new
     @user = User.new
   end
@@ -7,6 +11,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.admin = false
     if @user.save
+      log_in(@user)
+      flash[:notice] = 'アカウントを登録しました'
       redirect_to tasks_path
     else
       render :new
@@ -14,16 +20,30 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+    @user = User.find(params[:id])
   end
 
   def edit
+    @user = User.find(params[:id])
+  end
 
+  def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to user_path(params[:id])
+    else
+      render :new
+    end
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to current_user, flash: {notice: "アクセス権限がありません"} unless current_user?(@user)
   end
 end

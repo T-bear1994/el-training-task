@@ -2,6 +2,10 @@ ja:
   application:
     tasks_index: タスク一覧ページ
     new_task: タスクを登録する
+    user_show: アカウント詳細
+    new_session: ログイン
+    logout: ログアウト
+    new_user: アカウント登録
   activerecord:
     models:
       task: タスク
@@ -31,6 +35,14 @@ ja:
     edit:
       title: アカウント編集ページ
       submit: 更新する
+    show:
+      title: アカウント詳細ページ
+      name: 名前
+      email: メールアドレス
+  sessions:
+    new:
+      title: ログインページ
+      submit: ログイン
   attributes:
     title:  タイトル
     content: 内容
