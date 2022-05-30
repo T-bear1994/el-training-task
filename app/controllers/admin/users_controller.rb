@@ -17,7 +17,7 @@ class Admin::UsersController < ApplicationController
       flash[:notice] = 'アカウントを登録しました'
       redirect_to tasks_path
     else
-      render :new_admin
+      render :new
     end
   end
 
@@ -32,8 +32,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def admin?
-    if current_user.admin == false, flash: {notice: "管理者以外はアクセスできません" }
-      redirect_to tasks_path
+    if current_user.admin == false
+      redirect_to tasks_path, flash: {notice: "管理者以外はアクセスできません" }
     end
   end
 end
