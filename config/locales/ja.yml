@@ -6,6 +6,8 @@ ja:
     new_session: ログイン
     logout: ログアウト
     new_user: アカウント登録
+    admin_users_index: ユーザ一覧
+    admin_new_user: ユーザを追加する
   activerecord:
     models:
       task: タスク
@@ -28,6 +30,17 @@ ja:
       title: タスク詳細ページ
     edit:
       title: タスク編集ページ
+  admin:
+    users:
+      index:
+        title: ユーザ一覧ページ
+      new:
+        title: ユーザ登録ページ
+      show:
+        title: ユーザ詳細ページ
+        name: 名前
+        email: メールアドレス
+        admin: 管理者権限
   users:
     new:
       title: アカウント登録ページ
@@ -51,11 +64,16 @@ ja:
     priority: 優先度
     status: ステータス
     back: 戻る
+    show: 詳細
+    delete: 削除
     edit: 編集
     name: 名前
     email: メールアドレス
     password: パスワード
     password_confirmation: パスワード(確認)
+    admin: 管理者権限
+    tasks: 登録タスク数
+    destroy_confirm: 削除してもいいですか？
   notice:
     create: タスクを登録しました
     update: タスクを更新しました

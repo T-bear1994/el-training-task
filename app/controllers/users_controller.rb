@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:show]
   skip_before_action :login_required, only: [:new, :create]
   skip_before_action :logout_required, only: [:show, :edit, :update]
+  before_action :admin?, only: [:index]
 
   def new
     @user = User.new
@@ -35,6 +36,11 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @user.destroy
+  end
+
 
   private
 
