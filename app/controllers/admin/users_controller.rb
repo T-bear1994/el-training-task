@@ -25,6 +25,23 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+    user = User.find(params[:id])
+  end
+
+  def update
+    user = @user 
+    if @user.update(user_params)
+      redirect_to user_path(params[:id])
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    user.destroy
+  end
+
   private
 
   def user_params
