@@ -1,4 +1,4 @@
-<%= form_with(model: @user, local: true) do |form| %>
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this task from being saved:</h2>
@@ -28,7 +28,7 @@
     </div>
     <div class="field">
       <%= form.label :admin %><br>
-      <%= form.check_box :admin, {}, true, false %>
+      <%= form.check_box :admin %>
     </div>
     <% if @user.persisted? %>
       <%= form.submit id: "update-user" %>

@@ -8,13 +8,14 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
+    @user = User.new
     @users = User.all.page(params[:page]).per(10)
   end
   
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = 'アカウントを登録しました'
+      flash[:notice] = 'ユーザーを登録しました'
       redirect_to tasks_path
     else
       render :new
@@ -26,20 +27,26 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
-    user = @user 
+    @user = User.find(params[:id]) 
     if @user.update(user_params)
-      redirect_to user_path(params[:id])
+      redirect_to admin_user_path, notice: "ユーザを更新しました"
     else
       render :new
     end
   end
 
   def destroy
-    user.destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to admin_users_path, notice: "ユーザを削除しました" 
+    else
+      @users = User.all.page(params[:page]).per(10)
+      render :index
+    end
   end
 
   private
