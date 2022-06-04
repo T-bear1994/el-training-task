@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :only_own_tasks, only: [:show]
   skip_before_action :logout_required
 
   # GET /tasks or /tasks.json
@@ -77,5 +78,9 @@ class TasksController < ApplicationController
 
     def task_search_params
       params.fetch(:search, {}).permit(:status, :title)
+    end
+
+    def only_own_tasks
+      redirect_to tasks_path, flash: {notice: "本人以外アクセスできません"} unless @task.user_id == current_user.id
     end
 end
