@@ -1,13 +1,13 @@
 ja:
   application:
-    tasks_index: タスク一覧ページ
+    tasks_index: タスク一覧
     new_task: タスクを登録する
     user_show: アカウント詳細
     new_session: ログイン
     logout: ログアウト
     new_user: アカウント登録
     admin_users_index: ユーザ一覧
-    admin_new_user: ユーザを追加する
+    admin_new_user: ユーザを登録する
   activerecord:
     models:
       task: タスク

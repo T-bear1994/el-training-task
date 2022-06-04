@@ -10,7 +10,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         fill_in "user[password]", with: "iizuka"
         fill_in "user[password_confirmation]", with: "iizuka"
         click_button "commit"
-        expect(page).to have_content("アカウントを登録しました")
+        expect(page).to have_content("ユーザーを登録しました")
       end
     end
     context 'ログインせずにタスク一覧画面に遷移した場合' do

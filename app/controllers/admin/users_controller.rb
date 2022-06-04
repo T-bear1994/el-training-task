@@ -14,10 +14,10 @@ class Admin::UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    @user.email.downcase!
     if @user.save
       flash[:notice] = 'ユーザーを登録しました'
       redirect_to admin_users_path
-
     else
       render :new
     end
@@ -32,7 +32,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
+    @user.email.downcase!
     if @user.update(user_params)
       redirect_to admin_users_path, notice: "ユーザを更新しました"
     else
