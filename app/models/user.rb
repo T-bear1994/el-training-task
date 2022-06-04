@@ -11,14 +11,14 @@ class User < ApplicationRecord
 
   def must_have_at_least_one_admin
     if User.all.where(admin: true).count == 1 && self.admin
-      errors.add(:base, '管理者が0人になるため削除できません')
+      errors.add(:base, '管管理者権限を持つアカウントが0件になるため削除できません')
       throw(:abort)
     end
   end
 
   def at_least_one_admin_before_update
     if User.all.where(admin: true).count == 1
-      errors.add(:base, '管理者が0人になるため変更できません')
+      errors.add(:base, '管理者権限を持つアカウントが0件になるため更新できません')
       throw(:abort) unless self.admin
     end
   end

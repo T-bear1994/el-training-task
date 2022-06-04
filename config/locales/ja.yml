@@ -35,14 +35,14 @@ ja:
       index:
         title: ユーザ一覧ページ
       new:
-        title: ユーザ登録ページ(管理者用)
+        title: ユーザ登録ページ
       show:
-        title: ユーザ詳細ページ(管理者用)
+        title: ユーザ詳細ページ
         name: 名前
         email: メールアドレス
         admin: 管理者権限
       edit:
-        title: ユーザ詳細ページ(管理者用)
+        title: ユーザ編集ページ
   users:
     new:
       title: アカウント登録ページ
@@ -75,7 +75,7 @@ ja:
     password_confirmation: パスワード(確認)
     admin: 管理者権限
     tasks: 登録タスク数
-    destroy_confirm: 削除してもいいですか？
+    destroy_confirm: 本当に削除してもよろしいですか？
   notice:
     create: タスクを登録しました
     update: タスクを更新しました
