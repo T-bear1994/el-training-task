@@ -25,4 +25,22 @@ FactoryBot.define do
     status { '完了' }
     association :user, factory: :third_user
   end
+
+  factory :fourth_task, class: Task do
+    title { '学習' }
+    content { '現場Railsを読む' }
+    deadline_on { '2025-02-19' }
+    priority { '高' }
+    status { '未着手' }
+    association :user, factory: :third_user
+  end
+
+  factory :fifth_task, class: Task do
+    title { 'バイト' }
+    content { '日勤' }
+    deadline_on { '2025-02-22' }
+    priority { '中' }
+    status { '着手中' }
+    association :user, factory: :third_user
+  end
 end
