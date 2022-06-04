@@ -35,12 +35,14 @@ ja:
       index:
         title: ユーザ一覧ページ
       new:
-        title: ユーザ登録ページ
+        title: ユーザ登録ページ(管理者用)
       show:
-        title: ユーザ詳細ページ
+        title: ユーザ詳細ページ(管理者用)
         name: 名前
         email: メールアドレス
         admin: 管理者権限
+      edit:
+        title: ユーザ詳細ページ(管理者用)
   users:
     new:
       title: アカウント登録ページ
