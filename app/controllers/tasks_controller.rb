@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-  before_action :only_own_tasks, only: [:show]
+  before_action :only_own_tasks, only: [:show, :edit]
   skip_before_action :logout_required
 
   # GET /tasks or /tasks.json

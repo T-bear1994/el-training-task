@@ -32,7 +32,6 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.email.downcase!
     if @user.update(user_params)
       redirect_to user_path(params[:id]), flash: {notice: "ユーザを更新しました"}
     else
