@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
 
   def index
     @user = User.new
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.includes(:tasks).page(params[:page]).per(10)
   end
   
   def create
