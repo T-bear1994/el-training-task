@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user.email.downcase!
     if @user.save
       log_in(@user)
-      flash[:notice] = 'アカウントを登録しました'
+      flash[:notice] = 'ユーザを登録しました'
       redirect_to tasks_path
     else
       render :new

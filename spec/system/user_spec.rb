@@ -5,12 +5,12 @@ RSpec.describe 'ユーザ管理機能', type: :system do
     context 'ユーザを登録した場合' do
       it 'タスク一覧画面に遷移する' do
         visit new_user_path
-        fill_in "user[name]", with: "iizuka"
-        fill_in "user[email]", with: "iizuka@gmail.com"
-        fill_in "user[password]", with: "iizuka"
-        fill_in "user[password_confirmation]", with: "iizuka"
+        fill_in "user[name]", with: "hatakeyama"
+        fill_in "user[email]", with: "hayakeyama@gmail.com"
+        fill_in "user[password]", with: "hatakeyama"
+        fill_in "user[password_confirmation]", with: "hatakeyama"
         click_button "commit"
-        expect(page).to have_content("ユーザーを登録しました")
+        expect(page).to have_content("ユーザを登録しました")
       end
     end
     context 'ログインせずにタスク一覧画面に遷移した場合' do
@@ -73,12 +73,12 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         fill_in "user[password_confirmation]", with: "123456"
         check "user[admin]"
         click_button "commit"
-        expect(page).to have_content "ユーザーを登録しました"
+        expect(page).to have_content "ユーザを登録しました"
       end
       it 'ユーザ詳細画面にアクセスできる' do
         user = User.first
         visit admin_user_path(user.id)
-        expect(page).to have_content "ユーザ詳細ページ(管理者用)"
+        expect(page).to have_content "ユーザ詳細ページ"
       end
       it 'ユーザ編集画面から、自分以外のユーザを編集できる' do
         click_link "アカウント詳細"

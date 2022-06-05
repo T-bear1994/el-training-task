@@ -10,7 +10,7 @@ ja:
     admin_new_user: ユーザを登録する
   activerecord:
     models:
-      task: タスク
+      task: タスク   
   views:
     pagination:
       first: 最初のページ
