@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user.email.downcase!
     if @user.save
       log_in(@user)
-      flash[:notice] = 'ユーザーを登録しました'
+      flash[:notice] = 'アカウントを登録しました'
       redirect_to tasks_path
     else
       render :new
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to user_path(params[:id]), flash: {notice: "ユーザを更新しました"}
+      redirect_to user_path(params[:id]), flash: {notice: "アカウントを更新しました"}
     else
       render :edit
     end

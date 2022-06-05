@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
     @user.email.downcase!
     if @user.save
-      flash[:notice] = 'ユーザーを登録しました'
+      flash[:notice] = 'ユーザを登録しました'
       redirect_to admin_users_path
     else
       render :new
