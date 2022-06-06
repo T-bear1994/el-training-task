@@ -1,0 +1,35 @@
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </div>
+    <div class="field">
+      <%= form.label :email %><br>
+      <%= form.email_field :email %>
+    </div>
+    <div class="field">
+      <%= form.label :password %><br>
+      <%= form.password_field :password %>
+    </div>
+    <div class="field">
+      <%= form.label :password_confirmation %><br>
+      <%= form.password_field :password_confirmation %>
+    </div>
+    
+    <% if @user.persisted? %>
+      <%= form.submit id: "update-user" %>
+    <% else %>
+      <%= form.submit id: "create-user" %>
+    <% end %>
+<% end %>

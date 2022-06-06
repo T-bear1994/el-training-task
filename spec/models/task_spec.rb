@@ -4,21 +4,30 @@ RSpec.describe 'タスクモデル機能', type: :model do
   describe 'バリデーションのテスト' do
     context 'タスクのタイトルが空文字の場合' do
       it 'バリデーションに失敗する' do
-        task = Task.create(title: '', content: '企画書を作成する。')
+        task = Task.new(title: '', content: '企画書を作成する。', deadline_on: "2022-03-22", priority: "中", status: "未着手")
+        user = User.create(name: "Mike", email: "mike@gmail.com", password:"123456", admin: false)
+        task.user_id = user.id
+        task.save
         expect(task).not_to be_valid
       end
     end
 
     context 'タスクの説明が空文字の場合' do
       it 'バリデーションに失敗する' do
-        task = Task.create(title: 'Important!', content: '')
+        task = Task.new(title: 'Todo', content: '', deadline_on: "2022-03-22", priority: "中", status: "未着手")
+        user = User.create(name: "Mike", email: "mike@gmail.com", password:"123456", admin: false)
+        task.user_id = user.id
+        task.save
         expect(task).not_to be_valid
       end
     end
     
     context 'タスクのタイトルと説明に値が入っている場合' do
       it 'タスクを登録できる' do
-        task = Task.create(title: 'Test sample', content: 'Content sample', deadline_on: '2025-03-11', priority: '中', status: '未着手')
+        task = Task.new(title: 'Important!', content: 'qqq', deadline_on: "2022-03-22", priority: "中", status: "未着手")
+        user = User.create(name: "Mike", email: "mike@gmail.com", password:"123456", admin: false)
+        task.user_id = user.id
+        task.save
         expect(task).to be_valid
       end
     end

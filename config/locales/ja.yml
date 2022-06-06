@@ -1,10 +1,16 @@
 ja:
   application:
-    tasks_index: タスク一覧ページ
+    tasks_index: タスク一覧
     new_task: タスクを登録する
+    user_show: アカウント詳細
+    new_session: ログイン
+    logout: ログアウト
+    new_user: アカウント登録
+    admin_users_index: ユーザ一覧
+    admin_new_user: ユーザを登録する
   activerecord:
     models:
-      task: タスク
+      task: タスク   
   views:
     pagination:
       first: 最初のページ
@@ -24,6 +30,34 @@ ja:
       title: タスク詳細ページ
     edit:
       title: タスク編集ページ
+  admin:
+    users:
+      index:
+        title: ユーザ一覧ページ
+      new:
+        title: ユーザ登録ページ
+      show:
+        title: ユーザ詳細ページ
+        name: 名前
+        email: メールアドレス
+        admin: 管理者権限
+      edit:
+        title: ユーザ編集ページ
+  users:
+    new:
+      title: アカウント登録ページ
+      submit: 登録する
+    edit:
+      title: アカウント編集ページ
+      submit: 更新する
+    show:
+      title: アカウント詳細ページ
+      name: 名前
+      email: メールアドレス
+  sessions:
+    new:
+      title: ログインページ
+      submit: ログイン
   attributes:
     title:  タイトル
     content: 内容
@@ -32,7 +66,16 @@ ja:
     priority: 優先度
     status: ステータス
     back: 戻る
+    show: 詳細
+    delete: 削除
     edit: 編集
+    name: 名前
+    email: メールアドレス
+    password: パスワード
+    password_confirmation: パスワード(確認)
+    admin: 管理者権限
+    tasks: 登録タスク数
+    destroy_confirm: 本当に削除してもよろしいですか？
   notice:
     create: タスクを登録しました
     update: タスクを更新しました
