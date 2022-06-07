@@ -41,6 +41,12 @@
     <%= form.select :status, Task.statuses.keys.to_a, { include_blank: ""} %>
   </div>
 
+  <div class="field">
+    <%= form.label :label %>
+    <br>
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+  </div>
+
   <div class="actions">
     <% if task.persisted? %>
       <%= form.submit id:'update-task' %>
