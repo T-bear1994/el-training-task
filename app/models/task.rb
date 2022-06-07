@@ -17,9 +17,11 @@ class Task < ApplicationRecord
 
     status_is(search_params[:status])
       .title_like(search_params[:title])
+      .sort_label(search_params[:label_id])
   end
   scope :status_is, -> (status) { where(status: status) if status.present? }
   scope :title_like, -> (title) { where('title LIKE ?', "%#{title}%") if title.present? }
+  scope :sort_label, -> (label_id) { where(labels: { id: label_id }) if label_id.present? }
   scope :ordered_by_created_at, -> { order(created_at: "DESC") }
   scope :sort_deadline_on, -> { order(deadline_on: "ASC") }
   scope :sort_priority, -> { order(priority: "DESC") }
