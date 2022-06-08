@@ -1,23 +1,26 @@
 <h1><%= t ".title" %></h1>
 
-<%= form_with url: tasks_path, method: :get, scope: :search, local: true do |f| %>
-  <div class="status_search">
-    <%= f.label :status, t("attributes.status") %>
-    <%= f.select :status, Task.statuses.keys.to_a, { include_blank: ""} %>
+<%= form_with url: tasks_path, method: :get, class: "container", scope: :search, local: true do |f| %>
+  <div class="form-row form-inline justify-content-between">
+    <div class="status-search form-group col-3 flex-column">
+      <%= f.label :status, t("attributes.status") %>
+      <%= f.select :status, Task.statuses.keys.to_a, { include_blank: ""}, class: "form-control" %>
+    </div>
+    <div class="form-group col-4 flex-column">
+      <%= f.label :title, t("attributes.title") %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group col-4 flex-column">
+      <%= f.label :label, t("attributes.label") %>
+      <%= f.select("label_id", Label.pluck(:name, :id), { include_blank: ""}, class: "form-control") %>
+    </div>
   </div>
-  <div class="title_search">
-    <%= f.label :title, t("attributes.title") %>
-    <%= f.text_field :title %>
+  <div class="mt-2 justify-content-end d-flex">
+    <%= f.submit "検索", id: 'search_task', class: "btn btn-primary" %>
   </div>
-  <div class="label_search">
-    <%= f.label :label, t("attributes.label") %>
-    <%= f.select("label_id", Label.pluck(:name, :id), { include_blank: ""}) %>
-  </div>
-    <%= f.submit "検索", id: 'search_task' %>
 <% end %>
-  
 
-<table>
+<table class="table mt-5">
   <thead>
     <tr>
       <th><%= t "attributes.title" %></th>
@@ -39,9 +42,9 @@
         <td><%= task.deadline_on %></td>
         <th><%= task.priority %></th>
         <td><%= task.status %></td>
-        <td><%= link_to t("tasks.index.show"), task, class: "show-task" %></td>
-        <td><%= link_to t("attributes.edit"), edit_task_path(task), class: "edit-task" %></td>
-        <td><%= link_to t("tasks.index.destroy"), task, class: "destroy-task", method: :delete, data: { confirm: t("tasks.index.destroy_confirm") } %></td>
+        <td><%= link_to t("tasks.index.show"), task, class: "show-task btn btn-primary" %></td>
+        <td><%= link_to t("attributes.edit"), edit_task_path(task), class: "edit-task btn btn-primary" %></td>
+        <td><%= link_to t("tasks.index.destroy"), task, class: "destroy-task btn btn-danger", method: :delete, data: { confirm: t("tasks.index.destroy_confirm") } %></td>
       </tr>
     <% end %>
   </tbody>

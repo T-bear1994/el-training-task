@@ -1,6 +1,6 @@
 <h1><%= t(".title") %></h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>名前</th>
@@ -14,8 +14,8 @@
       <tr>
         <td><%= label.name %></td>
         <td><%= Task.where(id: label.id).count %></td>
-        <td><%= link_to t("attributes.edit"), edit_label_path(label), id: "edit-label" %></td>
-        <td><%= link_to t("attributes.delete"), label, method: :delete, id: "destroy-label", data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("attributes.edit"), edit_label_path(label), id: "edit-label", class: "btn btn-primary" %></td>
+        <td><%= link_to t("attributes.delete"), label, method: :delete, id: "destroy-label", class: "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
