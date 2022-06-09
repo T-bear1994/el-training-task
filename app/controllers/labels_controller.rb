@@ -26,7 +26,7 @@ class LabelsController < ApplicationController
 
     respond_to do |format|
       if @label.save
-        format.html { redirect_to @label, notice: "ラベルを登録しました" }
+        format.html { redirect_to labels_path, notice: "ラベルを登録しました" }
         format.json { render :show, status: :created, location: @label }
       else
         format.html { render :new, status: :unprocessable_entity }
