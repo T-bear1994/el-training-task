@@ -11,7 +11,7 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks.sort_priority.ordered_by_created_at.page(params[:page]).per(10)
     else
       @search_params = task_search_params
-      @tasks = current_user.tasks.search_index(@search_params).ordered_by_created_at.page(params[:page]).per(10)
+      @tasks = current_user.tasks.left_outer_joins(:labels).search_index(@search_params).distinct.ordered_by_created_at.page(params[:page]).per(10)
     end
   end
 
