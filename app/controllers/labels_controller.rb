@@ -4,7 +4,7 @@ class LabelsController < ApplicationController
 
   # GET /labels or /labels.json
   def index
-    @labels = Label.all
+    @labels = Label.includes(:tasks)
   end
 
   # GET /labels/1 or /labels/1.json
