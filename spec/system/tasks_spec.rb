@@ -17,8 +17,9 @@ RSpec.describe "タスク管理機能", type: :system do
         select "中", from: "優先度"
         select "未着手", from: "ステータス"
         click_button "登録する"
-        expect(page).to have_content "Laundry"
         expect(page).to have_content "タスクを登録しました"
+        visit tasks_path
+        expect(page).to have_content "Laundry"
       end
     end
   end
@@ -62,8 +63,8 @@ RSpec.describe "タスク管理機能", type: :system do
     describe 'ソート機能' do
       context '「終了期限でソートする」というリンクをクリックした場合' do
         it "終了期限昇順に並び替えられたタスク一覧が表示される" do
-          wait.until {click_link '終了期限'}
-          task_list = page.all('tbody tr')
+          click_link '終了期限'
+          task_list = all('tbody tr')
           expect(task_list[0]).to have_content '家事'
           expect(task_list[1]).to have_content '学習'
           expect(task_list[2]).to have_content 'バイト'
@@ -72,7 +73,7 @@ RSpec.describe "タスク管理機能", type: :system do
       context '「優先度でソートする」というリンクをクリックした場合' do
         it "優先度の高い順に並び替えられたタスク一覧が表示される" do
           click_link '優先度'
-          task_list = page.all('tbody tr')
+          task_list = all('tbody tr')
           expect(task_list[0]).to have_content "学習"
           expect(task_list[1]).to have_content "バイト"
           expect(task_list[2]).to have_content "家事"
@@ -132,6 +133,32 @@ RSpec.describe "タスク管理機能", type: :system do
         expect(page).to have_content "タスク詳細ページ"
         expect(page).to have_content task.title
         expect(page).to have_content task.content
+      end
+    end
+  end
+
+  describe '検索機能' do
+    before do
+      task = FactoryBot.create(:task) 
+      task2 = FactoryBot.create(:fourth_task, user_id: task.user.id)
+      task3 = FactoryBot.create(:fifth_task, user_id: task.user.id)
+      label = FactoryBot.create(:label)
+      labelling = FactoryBot.create(:labelling, task: task, label: label)
+      visit new_session_path
+      fill_in "session[email]", with: "thomas@gmail.com"
+      fill_in "session[password]", with: "123456"
+      click_button "commit"
+      visit tasks_path
+    end
+    
+
+    context 'ラベルで検索をした場合' do
+      it "そのラベルの付いたタスクがすべて表示される" do
+        # toとnot_toのマッチャを使って表示されるものとされないものの両方を確認する
+        select 'ラベル', from: 'label_1'
+        click_button '検索'
+        expect(page).to have_content "書類作成"
+        expect(page).to have_content "メール送信"
       end
     end
   end
