@@ -44,10 +44,10 @@
   <div class="field">
     <%= form.label :label %>
     <br>
-    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name, class: "form-check-label") %>
+    <%= form.select("label_id", Label.where(user_id: @user.id).pluck(:name, :id), { include_blank: ""}, class: "form-control") %>
   </div>
 
-  <div class="actions text-right">
+  <div class="actions text-right mt-3">
     <% if task.persisted? %>
       <%= form.submit id:'update-task', class: "btn btn-primary" %>
     <% else %>

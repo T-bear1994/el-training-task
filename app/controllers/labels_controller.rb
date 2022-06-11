@@ -1,10 +1,11 @@
 class LabelsController < ApplicationController
   before_action :set_label, only: %i[ show edit update destroy ]
   skip_before_action :logout_required
+  before_action :only_own_labels, only: [:edit]
 
   # GET /labels or /labels.json
   def index
-    @labels = Label.includes(:tasks)
+    @labels = current_user.labels.includes(:tasks)
   end
 
   # GET /labels/1 or /labels/1.json
@@ -23,7 +24,7 @@ class LabelsController < ApplicationController
   # POST /labels or /labels.json
   def create
     @label = Label.new(label_params)
-
+    @label.user_id = current_user.id
     respond_to do |format|
       if @label.save
         format.html { redirect_to labels_path, notice: "ラベルを登録しました" }
@@ -66,5 +67,9 @@ class LabelsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def label_params
       params.require(:label).permit(:name)
+    end
+
+    def only_own_labels
+      redirect_to labels_path, flash: {notice: "本人以外アクセスできません"} unless @label.user_id == current_user.id
     end
 end

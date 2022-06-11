@@ -3,8 +3,10 @@ class User < ApplicationRecord
   before_update :at_least_one_admin_before_update
   before_save { email.downcase! }
   before_update { email.downcase! }
+
   has_many :tasks, dependent: :destroy
   has_secure_password
+  has_many :labels, dependent: :destroy
   validates :password, length: { minimum: 6 }
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }

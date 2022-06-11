@@ -5,6 +5,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    @user = current_user
     if params[:sort_deadline_on]
       @tasks = current_user.tasks.sort_deadline_on.ordered_by_created_at.page(params[:page]).per(10)
     elsif params[:sort_priority]
@@ -22,10 +23,12 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @user = current_user
   end
 
   # GET /tasks/1/edit
   def edit
+    @user = current_user
   end
 
   # POST /tasks or /tasks.json
