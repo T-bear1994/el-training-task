@@ -40,7 +40,7 @@ class LabelsController < ApplicationController
   def update
     respond_to do |format|
       if @label.update(label_params)
-        format.html { redirect_to @label, notice: "ラベルを更新しました" }
+        format.html { redirect_to labels_path, notice: "ラベルを更新しました" }
         format.json { render :show, status: :ok, location: @label }
       else
         format.html { render :edit, status: :unprocessable_entity }
