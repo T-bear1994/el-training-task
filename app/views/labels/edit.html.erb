@@ -1,9 +1,9 @@
 <div class="col-7 mx-auto">
   <h1><%= t(".title") %></h1>
 
-  <%= render 'form', task: @task %>
+  <%= render 'form', label: @label %>
 
   <div class="text-right mt-3">
-    <%= link_to t("attributes.back"), tasks_path, id: "back" %>
+    <%= link_to t(".back"), labels_path, id: "id" %>
   </div>
 </div>

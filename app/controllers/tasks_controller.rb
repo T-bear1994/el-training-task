@@ -5,13 +5,14 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    @user = current_user
     if params[:sort_deadline_on]
       @tasks = current_user.tasks.sort_deadline_on.ordered_by_created_at.page(params[:page]).per(10)
     elsif params[:sort_priority]
       @tasks = current_user.tasks.sort_priority.ordered_by_created_at.page(params[:page]).per(10)
     else
       @search_params = task_search_params
-      @tasks = current_user.tasks.search_index(@search_params).ordered_by_created_at.page(params[:page]).per(10)
+      @tasks = current_user.tasks.left_outer_joins(:labels).search_index(@search_params).distinct.ordered_by_created_at.page(params[:page]).per(10)
     end
   end
 
@@ -22,10 +23,12 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @user = current_user
   end
 
   # GET /tasks/1/edit
   def edit
+    @user = current_user
   end
 
   # POST /tasks or /tasks.json
@@ -73,11 +76,11 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+      params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, { label_ids: []})
     end
 
     def task_search_params
-      params.fetch(:search, {}).permit(:status, :title)
+      params.fetch(:search, {}).permit(:status, :title, :label_id)
     end
 
     def only_own_tasks

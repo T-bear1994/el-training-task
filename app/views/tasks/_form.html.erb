@@ -14,38 +14,44 @@
   <div class="field">
     <%= form.label :title %>
     <br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= form.label :content %>
     <br>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= form.label :deadline_on %>
     <br>
-    <%= form.date_field :deadline_on %>
+    <%= form.date_field :deadline_on, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
     <br>
-    <%= form.select :priority, Task.priorities.keys.to_a, { include_blank: ""} %>
+    <%= form.select :priority, Task.priorities.keys.to_a, { include_blank: ""}, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= form.label :status %>
     <br>
-    <%= form.select :status, Task.statuses.keys.to_a, { include_blank: ""} %>
+    <%= form.select :status, Task.statuses.keys.to_a, { include_blank: ""}, class: "form-control" %>
   </div>
 
-  <div class="actions">
+  <div class="field">
+    <%= form.label :label %>
+    <br>
+    <%= form.collection_check_boxes(:label_ids, Label.where(user_id: @user.id), :id, :name, class: "form-check-label") %>
+  </div>
+
+  <div class="actions text-right">
     <% if task.persisted? %>
-      <%= form.submit id:'update-task' %>
+      <%= form.submit id:'update-task', class: "btn btn-primary" %>
     <% else %>
-      <%= form.submit id:'create-task' %>
+      <%= form.submit id:'create-task', class: "btn btn-primary" %>
     <% end %>
   </div>
 <% end %>
