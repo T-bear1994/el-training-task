@@ -139,7 +139,7 @@ RSpec.describe "タスク管理機能", type: :system do
       task = FactoryBot.create(:task) 
       task2 = FactoryBot.create(:fourth_task, user_id: task.user.id)
       task3 = FactoryBot.create(:fifth_task, user_id: task.user.id)
-      label = FactoryBot.create(:label)
+      label = FactoryBot.create(:label, user_id: task.user.id)
       labelling = FactoryBot.create(:labelling, task: task, label: label)
       visit new_session_path
       fill_in "session[email]", with: "thomas@gmail.com"
@@ -147,7 +147,6 @@ RSpec.describe "タスク管理機能", type: :system do
       click_button "commit"
       visit tasks_path
     end
-    
 
     context 'ラベルで検索をした場合' do
       it "そのラベルの付いたタスクがすべて表示される" do
