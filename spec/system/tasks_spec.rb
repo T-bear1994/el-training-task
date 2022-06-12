@@ -65,15 +65,22 @@ RSpec.describe "タスク管理機能", type: :system do
         it "終了期限昇順に並び替えられたタスク一覧が表示される" do
           visit tasks_path
           click_link '終了期限'
-          expect(page.text).to match %r{#{task.title}.*#{task2.title}.*#{task3.title} }
+          sleep 1.0
+          task_list = all('tbody tr')
+          expect(task_list[0]).to have_content '家事'
+          expect(task_list[1]).to have_content '学習'
+          expect(task_list[2]).to have_content 'バイト'
         end
       end
       context '「優先度でソートする」というリンクをクリックした場合' do
         it "優先度の高い順に並び替えられたタスク一覧が表示される" do
+          visit tasks_path
           click_link '優先度'
-          expect(all('tbody tr')[0]).to have_content "学習"
-          expect(all('tbody tr')[1]).to have_content "バイト"
-          expect(all('tbody tr')[2]).to have_content "家事"
+          sleep 1.0
+          task_list = all('tbody tr')
+          expect(task_list[0]).to have_content "学習"
+          expect(task_list[1]).to have_content "バイト"
+          expect(task_list[2]).to have_content "家事"
         end
       end
     end
